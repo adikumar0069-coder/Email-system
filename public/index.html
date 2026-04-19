@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Send Ticket Email</h2>
+
+<input id="email" placeholder="Receiver Email"><br><br>
+<input id="matchName" placeholder="Match Name"><br><br>
+<input id="date" placeholder="Date"><br><br>
+<input id="time" placeholder="Time"><br><br>
+<input id="stadium" placeholder="Stadium"><br><br>
+<input id="tickets" placeholder="Number of tickets"><br><br>
+<input id="stand" placeholder="Stand name"><br><br>
+<input id="image" placeholder="Image URL"><br><br>
+<input id="total" placeholder="Total Amount"><br><br>
+
+<select id="theme">
+  <option value="red">Template 1 (Red)</option>
+  <option value="purple">Template 2 (Purple)</option>
+</select><br><br>
+
+<button onclick="send()">Send Email</button>
+
+<p id="status"></p>
+
+<script>
+async function send() {
+  const btn = document.querySelector("button");
+  const status = document.getElementById("status");
+
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+
+  const data = {
+    to: email.value,
+    theme: theme.value,
+    data: {
+      matchName: matchName.value,
+      date: date.value,
+      time: time.value,
+      stadium: stadium.value,
+      tickets: tickets.value,
+      stand: stand.value,
+      image: image.value,
+      total: total.value
+    }
+  };
+
+  try {
+    const res = await fetch("/send-email", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    status.innerText = result.success
+      ? "✅ Email sent!"
+      : "❌ Failed";
+
+  } catch {
+    status.innerText = "❌ Error";
+  }
+
+  btn.disabled = false;
+  btn.innerText = "Send Email";
+}
+</script>
+
+</body>
+</html>
