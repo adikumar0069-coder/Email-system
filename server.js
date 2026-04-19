@@ -127,7 +127,7 @@ Enjoy the match!
 <tr>
 <td style="padding:16px;border-top:2px dotted #ddd">
 
-<a href="http://YOUR-IP:3000/ticket/${id}"
+<a href="https://email-system-xd4l.onrender.com/ticket/${id}"
 style="
 display:block;
 text-align:center;
