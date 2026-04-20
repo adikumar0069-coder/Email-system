@@ -513,12 +513,12 @@ body{
         </div>
 
         <div class="price-row">
-            <span>Tickets</span>
+            <span>Tickets Price(${data.tickets})</span>
             <strong>₹${data.price}</strong>
         </div>
 
         <div class="price-row">
-            <span>Fees</span>
+            <span>Convenience fees</span>
             <strong>₹${data.fees}</strong>
         </div>
     </div>
