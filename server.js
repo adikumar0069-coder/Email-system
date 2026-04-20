@@ -485,15 +485,20 @@ body{
                 <span>Enter From</span>
                 <strong>Main Gate</strong>
             </div>
-
+            
             <div class="row">
-                <span>Level</span>
-                <strong>${data.level || "1"}</strong>
+                <span>Main Gate</span>
+                <strong>3</strong>
             </div>
 
             <div class="row">
-                <span>Seat</span>
-                <strong>${data.seat || "Auto Assigned"}</strong>
+                <span>Staircase</span>
+                <strong>${data.seat || "1"}</strong>
+            </div>
+
+            <div class="row">
+                <span>Level</span>
+                <strong>${data.level || "Auto Assigned"}</strong>
             </div>
         </div>
 
