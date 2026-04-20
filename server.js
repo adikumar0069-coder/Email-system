@@ -483,7 +483,7 @@ body{
         <div class="ticket-details">
             <div class="row">
                 <span>Enter From</span>
-                <strong>"Main Gate"</strong>
+                <strong>Main Gate</strong>
             </div>
 
             <div class="row">
