@@ -1,31 +1,121 @@
-<!DOCTYPE html>
-<html>
-<body>
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Panel</title><style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f3f3f3;
+}
 
-<h2>Send Ticket Email</h2>
+.container{
+    max-width:420px;
+    margin:auto;
+    padding:20px;
+}
 
-<input id="email" placeholder="Receiver Email"><br><br>
-<input id="matchName" placeholder="Match Name"><br><br>
-<input id="date" placeholder="Date"><br><br>
-<input id="time" placeholder="Time"><br><br>
-<input id="stadium" placeholder="Stadium"><br><br>
-<input id="tickets" placeholder="Number of tickets"><br><br>
-<input id="stand" placeholder="Stand name"><br><br>
-<input id="image" placeholder="Image URL"><br><br>
-<input id="total" placeholder="Total Amount"><br><br>
+.card{
+    background:#fff;
+    padding:18px;
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
 
-<select id="theme">
+h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:25px;
+    background:#6C3BFF;
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    background:#aaa;
+}
+
+.status{
+    text-align:center;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.lock-screen{
+    position:fixed;
+    inset:0;
+    background:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:white;
+}
+
+.lock-screen input{
+    max-width:200px;
+    text-align:center;
+    font-size:18px;
+    letter-spacing:5px;
+}
+
+.lock-screen button{
+    max-width:200px;
+    margin-top:10px;
+}
+</style></head><body><!-- 🔒 LOCK SCREEN --><div class="lock-screen" id="lock">
+    <h2>Enter Admin PIN</h2>
+    <input type="password" id="pin" maxlength="4" placeholder="****">
+    <button onclick="unlock()">Unlock</button>
+</div><div class="container" id="app" style="display:none;"><div class="card">
+<h2>Send Ticket</h2><input id="email" placeholder="Receiver Email"><input id="matchName" placeholder="Match Name">
+<input id="date" placeholder="Date">
+<input id="time" placeholder="Time">
+<input id="stadium" placeholder="Stadium">
+<input id="tickets" placeholder="Number of tickets">
+<input id="stand" placeholder="Stand"><input id="gate" placeholder="Gate (optional)">
+<input id="level" placeholder="Level (optional)">
+<input id="seat" placeholder="Seat (optional)"><input id="image" placeholder="Image URL"><input id="price" placeholder="Ticket Price">
+<input id="fees" placeholder="Fees">
+<input id="total" placeholder="Total Amount"><select id="theme">
   <option value="red">Template 1 (Red)</option>
   <option value="purple">Template 2 (Purple)</option>
-</select><br><br>
+</select><button onclick="send()" id="sendBtn">Send Email</button>
 
-<button onclick="send()">Send Email</button>
+<p class="status" id="status"></p></div>
+</div><script>
+// 🔐 CHANGE THIS PIN
+const ADMIN_PIN = "1234";
 
-<p id="status"></p>
+function unlock(){
+    const input = document.getElementById("pin").value;
 
-<script>
+    if(input === ADMIN_PIN){
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("app").style.display = "block";
+    }else{
+        alert("Wrong PIN");
+    }
+}
+
 async function send() {
-  const btn = document.querySelector("button");
+  const btn = document.getElementById("sendBtn");
   const status = document.getElementById("status");
 
   btn.disabled = true;
@@ -41,7 +131,12 @@ async function send() {
       stadium: stadium.value,
       tickets: tickets.value,
       stand: stand.value,
+      gate: gate.value,
+      level: level.value,
+      seat: seat.value,
       image: image.value,
+      price: price.value,
+      fees: fees.value,
       total: total.value
     }
   };
@@ -66,7 +161,5 @@ async function send() {
   btn.disabled = false;
   btn.innerText = "Send Email";
 }
-</script>
-
-</body>
+</script></body>
 </html>
